@@ -22,7 +22,8 @@ public class AltPort implements ClientModInitializer {
 
 	private ServerAddress serverAddress;
 	private ServerInfo serverInfo;
-	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
+	public static final String MOD_ID = "altport";
+	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	public static AltPort getInstance() {
 		return instance;
@@ -53,10 +54,8 @@ public class AltPort implements ClientModInitializer {
 
 
 	public void tryConnect(ServerAddress address, ServerInfo info){
-		System.out.println("Now trying to connect to : "+address);
 		getInstance().serverAddress = address;
 		getInstance().serverInfo = info;
-		System.out.println(address.getPort());
 		try {
 			Field field = info.getClass().getDeclaredField("failoverPort");
 			int failoverPort = (Integer) field.get(info);
@@ -66,8 +65,6 @@ public class AltPort implements ClientModInitializer {
 		}catch(Exception ex){
 			LOGGER.warn(ex.getMessage()); //TODO: better error handling!
 		}
-
-
 	}
 
 	@Override

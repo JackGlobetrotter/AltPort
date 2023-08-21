@@ -17,6 +17,7 @@ public class ServerInfoMixin {
 
     @Inject(method = "fromNbt", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
     private static void loadFailoverPort(NbtCompound root, CallbackInfoReturnable<ServerInfo> cir, ServerInfo serverInfo) {
+        System.out.println(root);
         if (root.contains("failoverPort")) {
             AltPortHelper.setFailoverPort(serverInfo, root.getInt("failoverPort"));
         }
